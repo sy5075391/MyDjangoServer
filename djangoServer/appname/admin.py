@@ -7,6 +7,7 @@ from appname.models import Article
 
 
 class ArticleAdmin(admin.ModelAdmin):
+    # haha？
     list_display = ['title', 'content', 'time']
 
 
