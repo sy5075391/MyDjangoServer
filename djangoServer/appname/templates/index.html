@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>这是Django提供的web</title>
+</head>
+
+<body>
+    <h>这是我的python server开发开始</h>
+    {%  for art in list %}
+    <h1>{{ art.title }}</h1>
+    <span>{{ art.content }}</span>
+    <p>{{ art.time}}</p>
+    {% endfor %}
+</body>
+</html>
