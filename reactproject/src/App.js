@@ -1,65 +1,76 @@
-import React, {Component} from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
+import './App.css';
 
-axios.defaults.withCredentials = true;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-const server = 'http://192.168.0.113:8000';
-
+import {
+  registerServer,
+  loginServer,
+  allUsersServer
+} from './server';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "",
-            age: 0,
-            readData: []
-        };
-        this.change = this.change.bind(this);
-        this.write = this.write.bind(this);
-        this.read = this.read.bind(this);
+  constructor (props) {
+    super(props);
 
+    this.state = {
+      username: "",
+      password: "",
+      users: []
     }
 
-    change(key, e) {
-        this.setState({
-            [key]: e.target.value
-        });
+    this.handlerChange = this.handlerChange.bind(this);
+    this.register = this.register.bind(this);
+    this.login = this.login.bind(this);
+    this.allUsers = this.allUsers.bind(this);
+  }
+
+  handlerChange (k, e) {
+    this.setState({
+      [k]: e.target.value
+    });
+  }
+
+  async register () {
+    let data = {
+      username: this.state.username,
+      password: this.state.password
     }
+    let res = await registerServer(data);
+    console.log(res);
+  }
 
-    async write() {
-        let data = {'name': this.state.name, 'age': this.state.age};
-        let res = await axios.post(`${server}/new_person/`, data);
-        console.log(res)
+  async login () {
+    let data = {
+      username: this.state.username,
+      password: this.state.password
     }
+    let res = await loginServer(data);
+    console.log(res);
+  }
 
-    async read() {
-        let res = await axios.get(`${server}/read/`);
+  async allUsers () {
+    let res = await allUsersServer();
+    console.log(res);
+  }
 
-        this.setState({readData: res.data.data})
-    }
-
-    render() {
-        return (
-            <div className="App">
-                <input onChange={(e) => this.change("name", e)}/>
-                <br/>
-                <input onChange={(e) => this.change("age", e)}/>
-                <br/>
-                <button onClick={this.write}>write2</button>
-                <button onClick={this.read}>read</button>
-                <div className='read2'>
-                    {
-                        this.state.readData.map((number) =>
-                            <li>{number.fields.name + '-----' + number.fields.age}</li>
-                        )
-                    }
-                </div>
-            </div>
-
-        );
-    }
+  render() {
+    return (
+      <div className="App">
+        <div>
+          <input onChange={(e) => {this.handlerChange('username', e)}} placeholder="username" />
+        </div>
+        <div>
+          <input onChange={(e) => {this.handlerChange('password', e)}} placeholder="password" />
+        </div>
+        <div>
+          <button onClick={this.register}>register</button>
+          <button onClick={this.login}>login</button>
+        </div>
+        <div>
+          <button onClick={this.allUsers}>all users</button>
+        </div>
+      </div>
+    );
+  }
 }
 
-
 export default App;
-

@@ -24,3 +24,11 @@ class Animals(models.Model):
     name = models.CharField(max_length=10)
     age = models.IntegerField()
     time = models.DateTimeField(auto_now=True, null=False)
+
+
+# Create your models here.
+class Users(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid1(), editable=False, null=False)
+    username = models.CharField(max_length=10, null=False)
+    password = models.CharField(max_length=80, null=False)
+    time = models.DateTimeField(auto_now=True, null=False)
