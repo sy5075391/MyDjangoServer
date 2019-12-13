@@ -10,8 +10,53 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 import uuid
 from appname import models
+from appname.models import Person
 
 from django.http import HttpResponse
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from appname.serializers import PersonSerializers
+
+
+# restfulAPI method one
+class Test(APIView):
+    def get(self, request):
+        a = request.GET['a']
+        res = {
+            'success': True,
+            'data': a
+        }
+        return Response(res)
+
+
+# restfulAPI method two
+
+
+class PersonViewSet(viewsets.ModelViewSet):
+    @action(methods=['post'], detail=False)
+    def new_person(self, request):
+        data = json.loads(request.body)
+        data['id'] = uuid.uuid1()
+
+        Person.objects.create(**data)
+        res = {
+            'success': True,
+            'data': data
+        }
+
+        return Response(res)
+
+    @action(methods=['get'], detail=False)
+    def all_person(self, request):
+        data = PersonSerializers(Person.objects.all(), many=True).data
+        res = {
+            'success': True,
+            'data': data
+        }
+        return Response(res)
 
 
 def index(request):

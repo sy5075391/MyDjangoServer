@@ -28,7 +28,7 @@ class App extends Component {
 
     async write() {
         let data = {'name': this.state.name, 'age': this.state.age};
-        let res = await axios.post(`${server}/write/`, data);
+        let res = await axios.post(`${server}/new_person/`, data);
         console.log(res)
     }
 

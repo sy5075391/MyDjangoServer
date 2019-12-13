@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from appname import views as app_views
+from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', app_views.index),
     path('write/', app_views.write_server),
-    path('read/', app_views.read_server)
+    path('read/', app_views.read_server),
+
+    url('', include('appname.urls'))
 ]
