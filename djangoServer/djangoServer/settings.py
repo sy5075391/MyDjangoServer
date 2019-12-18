@@ -21,8 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'pt1in9r3se&=6t_zxv-hlcq5t64o&a!v)_w2z%lt+hw$+#oa%h'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 # 主要是为了安全，只允许你设置的域名（hosts）访问。
 # 如果不加，或者设置为 “*”，那么有可能别人随便把一个域名的解析指向到你的服务器，都能访问
@@ -84,19 +82,38 @@ WSGI_APPLICATION = 'djangoServer.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+PythonAnywhere = True  # 设为False是为了本地支持
+# PythonAnywhere = True  # 设为True是为了上线PythonAnywhere支持
 
-DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DjangeTest',
-        'USER': 'root',
-        'PASSWORD': '12345678',
-        'HOST': 'localhost',
-        'PORT': '3306',
+if PythonAnywhere is False:
+    DEBUG = True
+    ALLOWED_HOSTS = []
+    DATABASES = {
+        'default': {
+            # 'ENGINE': 'django.db.backends.sqlite3',
+            # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'DjangeTest',
+            'USER': 'root',
+            'PASSWORD': '12345678',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
     }
-}
+elif PythonAnywhere is True:
+    DEBUG = False
+    ALLOWED_HOSTS = ['Jamesholy2.pythonanywhere.com']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': "Jamesholy2$DjangeTest",
+            'USER': 'Jamesholy2',
+            'PASSWORD': 'q5075391',
+            'HOST': 'Jamesholy2.mysql.pythonanywhere-services.com',
+        }
+    }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
