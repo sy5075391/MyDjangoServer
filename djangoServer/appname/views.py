@@ -97,7 +97,8 @@ def read_server(request):
 from appname.serializers import UserSerializer
 from appname.models import Users
 from django.contrib.auth.hashers import make_password, check_password
-from appname.token import create_token,verify_token
+from appname.token import create_token, verify_token
+
 
 class UserViewSet(viewsets.ModelViewSet):
     # serializer_class = UserSerializer
@@ -124,6 +125,11 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(methods=['post'], detail=False)
     def login(self, request):
+        res = {
+            'success': False,
+            'mess': '用户名未注册'
+        }
+        return Response(res)
         data = json.loads(request.body)
         filter_user = Users.objects.filter(username=data['username'])
         if not len(filter_user):
