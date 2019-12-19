@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'djangoServer.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-# PythonAnywhere = True  # 设为False是为了本地支持
-PythonAnywhere = False  # 设为True是为了上线PythonAnywhere支持
+PythonAnywhere = True  # 设为False是为了本地支持
+# PythonAnywhere = False  # 设为True是为了上线PythonAnywhere支持
 
 if PythonAnywhere is False:
     DEBUG = True
@@ -103,7 +103,7 @@ if PythonAnywhere is False:
     CORS_ORIGIN_ALLOW_ALL = True
 elif PythonAnywhere is True:
     DEBUG = False
-    ALLOWED_HOSTS = ['Jamesholy2.pythonanywhere.com']
+    ALLOWED_HOSTS = ['*']
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
