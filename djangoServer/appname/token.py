@@ -18,7 +18,7 @@ def create_token(user):
 def verify_token(token):
     try:
         payload = jwt.decode(token, 'secret', algorithms='HS256')
-        # if payload['exp']
+        # #if payload['exp']
         token = create_token(payload)
         return token
     except:

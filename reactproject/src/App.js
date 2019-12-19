@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import {
   registerServer,
   loginServer,
@@ -14,8 +13,11 @@ class App extends Component {
     this.state = {
       username: "",
       password: "",
-      users: []
+      users: [],
+      data:"",
     }
+
+
 
     this.handlerChange = this.handlerChange.bind(this);
     this.register = this.register.bind(this);
@@ -35,7 +37,10 @@ class App extends Component {
       password: this.state.password
     }
     let res = await registerServer(data);
-    console.log(res);
+    console.log(typeof(res));
+      this.setState({
+      data :JSON.stringify(res)
+    })
   }
 
   async login () {
@@ -44,12 +49,16 @@ class App extends Component {
       password: this.state.password
     }
     let res = await loginServer(data);
-    console.log(res);
+    this.setState({
+      data :JSON.stringify(res)
+    })
   }
 
   async allUsers () {
     let res = await allUsersServer();
-    console.log(res);
+  this.setState({
+      data :JSON.stringify(res)
+    })
   }
 
   render() {
@@ -68,6 +77,7 @@ class App extends Component {
         <div>
           <button onClick={this.allUsers}>all users</button>
         </div>
+        <h1>data:{this.state.data}</h1>
       </div>
     );
   }

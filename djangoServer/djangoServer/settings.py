@@ -100,6 +100,8 @@ if PythonAnywhere is False:
             'PORT': '3306',
         }
     }
+    CORS_ALLOW_CREDENTIALS = True
+    CORS_ORIGIN_ALLOW_ALL = True
 elif PythonAnywhere is True:
     DEBUG = False
     ALLOWED_HOSTS = ['Jamesholy2.pythonanywhere.com']
@@ -112,6 +114,14 @@ elif PythonAnywhere is True:
             'HOST': 'Jamesholy2.mysql.pythonanywhere-services.com',
         }
     }
+    CORS_ALLOW_CREDENTIALS = True
+    CORS_ORIGIN_ALLOW_ALL = True
+    # CORS_ORIGIN_WHITELIST = [
+    #     'http://localhost:3000',
+    #     'http://127.0.0.1:3000',
+    #     'http://192.168.0.113:3000',
+    # ]
+
 
 
 
@@ -151,13 +161,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ALLOW_CREDENTIALS = True
-# CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://192.168.0.113:3000',
-]
+
 
 CORS_ALLOW_METHODS = [
     'DELETE',

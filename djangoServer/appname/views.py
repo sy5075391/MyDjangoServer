@@ -64,10 +64,14 @@ class PersonViewSet(viewsets.ModelViewSet):
     serializer_class = PersonSerializers
 
 
-def index(request):
+def index2(request):
     article_list = Article.objects.all()
 
-    return render(request, 'index.html', {"list": article_list})
+    return render(request, 'index2.html', {"list": article_list})
+
+
+def mypage(request):
+    return render(request, 'index.html')
 
 
 def write_server(request):
