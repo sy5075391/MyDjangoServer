@@ -103,15 +103,17 @@ from appname.token import create_token, verify_token
 class UserViewSet(viewsets.ModelViewSet):
     # serializer_class = UserSerializer
     # queryset = Users.objects.all()
-    @action(methods=['post'], detail=False)
+    @action(methods=['get'], detail=False)
     def register(self, request):
-        data = json.loads(request.body)
+        # get 取参数 query_params
+        data = request.query_params.dict()
+
         # 校验
         user = Users.objects.filter(username=data['username'])
         if len(user):
             res = {
                 'success': False,
-                'msg': '用户名已注册'
+                'msg': '用户已存在'
             }
             return Response(res)
         data['id'] = uuid.uuid1()
@@ -123,14 +125,9 @@ class UserViewSet(viewsets.ModelViewSet):
         }
         return Response(res)
 
-    @action(methods=['post'], detail=False)
+    @action(methods=['get'], detail=False)
     def login(self, request):
-        res = {
-            'success': False,
-            'mess': '用户名未注册'
-        }
-        return Response(res)
-        data = json.loads(request.body)
+        data = request.query_params.dict()
         filter_user = Users.objects.filter(username=data['username'])
         if not len(filter_user):
             res = {
