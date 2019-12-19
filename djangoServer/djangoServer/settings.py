@@ -21,7 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'pt1in9r3se&=6t_zxv-hlcq5t64o&a!v)_w2z%lt+hw$+#oa%h'
 
-
 # 主要是为了安全，只允许你设置的域名（hosts）访问。
 # 如果不加，或者设置为 “*”，那么有可能别人随便把一个域名的解析指向到你的服务器，都能访问
 # ALLOWED_HOSTS = [
@@ -122,9 +121,6 @@ elif PythonAnywhere is True:
     #     'http://192.168.0.113:3000',
     # ]
 
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -160,8 +156,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
 
 CORS_ALLOW_METHODS = [
     'DELETE',

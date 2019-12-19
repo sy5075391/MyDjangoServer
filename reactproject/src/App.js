@@ -6,6 +6,10 @@ import {
   allUsersServer
 } from './server';
 
+import "./css/style.css";
+
+
+
 class App extends Component {
   constructor (props) {
     super(props);
@@ -82,5 +86,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;

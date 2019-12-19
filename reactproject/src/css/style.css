@@ -1,0 +1,10 @@
+.App {
+  background-color: #555555;
+  font-size: 18px;
+    color: white;
+}
+
+button {
+    background-color: aquamarine;
+    margin: 20px;
+}
