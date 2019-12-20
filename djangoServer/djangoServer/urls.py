@@ -19,11 +19,12 @@ from appname import views as app_views
 from django.conf.urls import url, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path(r'index2/', app_views.index2),
+    path(r'admin/', admin.site.urls),
+    path(r'index2', app_views.index2),
     path(r'mypage/', app_views.mypage),
     path('write/', app_views.write_server),
     path('read/', app_views.read_server),
 
-    url('', include('appname.urls'))
+    url(r'', include('appname.urls')),
+    url(r'blog/', include('blogs.urls'))
 ]

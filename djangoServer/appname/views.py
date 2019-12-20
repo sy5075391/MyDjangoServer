@@ -22,14 +22,8 @@ from appname.serializers import PersonSerializers
 
 
 # restfulAPI method one
-class Test(APIView):
-    def get(self, request):
-        a = request.GET['a']
-        res = {
-            'success': True,
-            'data': a
-        }
-        return Response(res)
+def Test(request):
+    return render(request, 'index2.html', {"list": []})
 
 
 # restfulAPI method two
